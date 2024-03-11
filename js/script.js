@@ -101,7 +101,7 @@ const revealWord = function (guessedLetters) {
 		if (guessedLetters.includes(letter)) {
 			updatedWord.push(lette.toUpperCase());
 		} else {
-			updatedWord.push("●")
+			updatedWord.push("●");
 		}
 	}
 
