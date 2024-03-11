@@ -99,13 +99,19 @@ const revealWord = function (guessedLetters) {
 
 	for (const letter of wordArray) {
 		if (guessedLetters.includes(letter)) {
-			updatedWord.push(lette.toUpperCase());
+			updatedWord.push(letter.toUpperCase());
 		} else {
 			updatedWord.push("●");
 		}
 	}
 
-	console.log(updatedWord);
+	wordToGuess.innerText = updatedWord.join("");
+	playerWin();
 };
 
-revealWord();
+const playerWin = function () {
+	if (word.toUpperCase() === wordToGuess.innerText) {
+		message.classList.add("win");
+		message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+	}
+}
