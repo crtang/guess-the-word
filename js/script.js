@@ -42,6 +42,8 @@ guessButton.addEventListener("click", function (e) {
 
 	message.innerText = "";
 	let validated = validateGuess(letter);
+
+	input = "";
 	
 	if (validated !== undefined) {
 		makeGuess(validated);
@@ -74,8 +76,36 @@ const makeGuess = function (letter) {
 		message.innerText = "You've already guessed this letter. Try again!";
 	} else {
 		message.innerText = "";
-		let uppercaseLetter = letter.toUpperCase();
-		guessedLetters.push(`${uppercaseLetter}`);
-		console.log(guessedLetters);
+		guessedLetters.push(letter.toUpperCase());
+		updateList();
+		revealWord(guessedLetters);
 	}
-}
+};
+
+const updateList = function () {
+	guesses.innerHTML = "";
+
+	for (let letter of guessedLetters) {
+		let li = document.createElement("li");
+		li.innerText = letter;
+		guesses.append(li);
+	}
+};
+
+const revealWord = function (guessedLetters) {
+	const wordUpper = word.toUpperCase();
+	const wordArray = wordUpper.split("");
+	const updatedWord = [];
+
+	for (const letter of wordArray) {
+		if (guessedLetters.includes(letter)) {
+			updatedWord.push(lette.toUpperCase());
+		} else {
+			updatedWord.push("●")
+		}
+	}
+
+	console.log(updatedWord);
+};
+
+revealWord();
