@@ -18,7 +18,7 @@ const playAgainButton = document.querySelector(".play-again");
 // first word to guess
 let word = "magnolia";
 // guessed letters
-const guessedLetters = [];
+let guessedLetters = [];
 // remaining guesses
 let remainingGuesses = 8;
 // async function to fetch words
@@ -58,12 +58,12 @@ guessButton.addEventListener("click", function (e) {
 
 	message.innerText = "";
 	let validated = validateGuess(letter);
-
-	input = "";
 	
 	if (validated !== undefined) {
 		makeGuess(validated);
 	}
+
+	userInput.value = "";
 });
 
 // validate that user has entered a letter as a guess
@@ -133,7 +133,6 @@ const revealWord = function (guessedLetters) {
 const checkGuessesLeft = function (guess) {
 	const uppercaseWord = word.toUpperCase();
 	const checkedWord = uppercaseWord.split("");
-	console.log(guess);
 
 	if (!checkedWord.includes(guess.toUpperCase())) {
 		message.innerText = `The word doesn't contain the letter ${guess}.`;
@@ -166,4 +165,21 @@ const startOver = function () {
 	guesses.classList.add("hide");
 
 	playAgainButton.classList.remove("hide");
-}
+};
+
+playAgainButton.addEventListener("click", function () {
+	message.classList.remove("win");
+	message.innerText = "";
+	guesses.innerHTML = "";
+
+	remainingGuesses = 8;
+	guessedLetters = [];
+	numGuessesLeft.innerText = `${remainingGuesses} guesses`;
+
+	guessButton.classList.remove("hide");
+	guessesMessage.classList.remove("hide");
+	guesses.classList.remove("hide");
+	playAgainButton.classList.add("hide");
+
+	getWord();
+})
